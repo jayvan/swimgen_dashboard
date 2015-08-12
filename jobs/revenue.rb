@@ -1,6 +1,12 @@
 require 'pg'
 
-@pg = PG.connect(dbname: 'swimgen_development', user: 'postgres', password: 'foobar')
+pg_info = {
+  dbname: ENV['DB_NAME'],
+  user: ENV['DB_USER'],
+  password: ENV['DB_PASSWORD']
+}
+
+@pg = PG.connect(pg_info)
 
 def get_reports_in_previous_span(hours)
   query = "SELECT COUNT(*) FROM reports WHERE created_at > current_timestamp AT TIME ZONE 'GMT' - interval '#{hours} hours' AND created_at > current_timestamp AT TIME ZONE 'GMT' - interval '#{hours} hours'"
