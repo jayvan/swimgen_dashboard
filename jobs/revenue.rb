@@ -3,7 +3,8 @@ require 'pg'
 pg_info = {
   dbname: ENV['DB_NAME'],
   user: ENV['DB_USER'],
-  password: ENV['DB_PASSWORD']
+  password: ENV['DB_PASSWORD'],
+  hostaddr: ENV['DB_HOST']
 }
 
 @pg = PG.connect(pg_info)
