@@ -11,7 +11,7 @@ def get_memory_usage
   (100 * used / (used + free)).round(1)
 end
 
-SCHEDULER.every '15s' do
+SCHEDULER.every '15s', :first_in => 0 do
   send_event 'cpu_usage', { value: get_cpu_usage }
   send_event 'disk_usage', { value: get_disk_usage }
   send_event 'memory_usage', { value: get_memory_usage }
